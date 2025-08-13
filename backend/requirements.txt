@@ -1,0 +1,26 @@
+# FastAPI and server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# CORS for frontend integration
+fastapi-cors==0.0.6
+# Data validation (already installed)
+pydantic[email]==2.11.7
+
+# Database (PostgreSQL compatible with Python 3.13)
+sqlalchemy==1.4.53
+psycopg[binary]==3.2.9
+
+# AI Integration
+openai>=1.0.0
+httpx==0.25.0
+
+# Authentication & OAuth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+requests==2.31.0
+

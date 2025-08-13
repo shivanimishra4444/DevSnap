@@ -4,6 +4,9 @@
 # Virtual environments
 backend/venv/
 .venv/
+PROJECT_SETUP_GUIDE.md
+DATABASE_CONCEPTS_GUIDE.md
+DATABASE_SCHEMA.sql
 
 # Python cache
 __pycache__/
@@ -16,6 +19,7 @@ __pycache__/
 backend/env.local
 .env
 .env.local
+# Note: env.example is tracked (template for others)
 
 # Logs
 *.log

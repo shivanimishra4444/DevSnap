@@ -45,3 +45,4 @@ class User(Base):
     
     # Relationships
     projects = relationship("Project", back_populates="user", cascade="all, delete-orphan")
+    blogs = relationship("Blog", back_populates="user", cascade="all, delete-orphan")

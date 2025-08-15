@@ -13,7 +13,9 @@ from app.database import get_db
 from app.users.models import User
 from app.auth.jwt_utils import create_access_token
 from app.auth.dependencies import get_current_user
-from app.auth.schemas import TokenResponse, UserProfileResponse
+from app.auth.schemas import TokenResponse
+from app.schemas import UserProfileResponse
+from app.utils.serialization import load_user_with_relationships, serialize_sqlalchemy_to_pydantic
 
 # Load environment variables
 load_dotenv("env.local")
@@ -148,20 +150,18 @@ async def github_callback(code: str, state: str, db: Session = Depends(get_db)):
         )
 
 @router.get("/me", response_model=UserProfileResponse)
-async def get_current_user_profile(current_user: User = Depends(get_current_user)):
+async def get_current_user_profile(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
-    Get current user profile
+    Get current user profile with all related data (projects, blogs, etc.)
     """
-    return UserProfileResponse(
-        id=str(current_user.id),
-        name=current_user.name,
-        email=current_user.email,
-        github_id=current_user.github_id,
-        github_username=current_user.github_username,
-        profile_image=current_user.profile_image,
-        created_at=current_user.created_at,
-        updated_at=current_user.updated_at
-    )
+    # Load user with all relationships using utility function
+    user_with_relations = load_user_with_relationships(db, user_id=str(current_user.id))
+    
+    if not user_with_relations:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Clean serialization using Pydantic
+    return serialize_sqlalchemy_to_pydantic(user_with_relations, UserProfileResponse)
 
 @router.post("/logout")
 async def logout():

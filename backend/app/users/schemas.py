@@ -34,7 +34,7 @@ class UserResponse(BaseModel):
     """Schema for user responses"""
     id: UUID
     name: str
-    email: str
+    email: Optional[str] = None  # GitHub users might not have public email
     github_id: Optional[str] = None
     github_username: Optional[str] = None
     bio: Optional[str] = None
@@ -45,3 +45,6 @@ class UserResponse(BaseModel):
     
     class Config:
         from_attributes = True  # Allows conversion from SQLAlchemy model
+
+# Import UserProfileResponse from shared schemas
+from app.schemas import UserProfileResponse

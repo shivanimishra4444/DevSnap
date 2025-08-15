@@ -15,6 +15,7 @@ from app.blogs.models import Blog
 # Import routers
 from app.users.router import router as users_router
 from app.projects.router import router as projects_router
+from app.blogs.router import router as blogs_router
 from app.ai.router import router as ai_router
 from app.auth.router import router as auth_router
 
@@ -51,6 +52,7 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/api", tags=["Authentication"])
 app.include_router(users_router, prefix="/api/users", tags=["Users"])
 app.include_router(projects_router, prefix="/api/projects", tags=["Projects"])
+app.include_router(blogs_router, prefix="/api/blogs", tags=["Blogs"])
 app.include_router(ai_router, prefix="/api/ai", tags=["AI"])
 
 # Simple test endpoint

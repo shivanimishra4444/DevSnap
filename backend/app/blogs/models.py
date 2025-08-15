@@ -5,6 +5,7 @@ Blogs model - represents the blogs table
 from sqlalchemy import Column, String, Text, DateTime, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 from app.database import Base
 import uuid
 
@@ -28,3 +29,6 @@ class Blog(Base):
     # Timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    
+    # Relationship to User model
+    user = relationship("User", back_populates="blogs")

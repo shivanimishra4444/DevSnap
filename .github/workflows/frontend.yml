@@ -1,0 +1,45 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths: [ 'frontend/**', 'package.json', '.github/workflows/frontend.yml' ]
+  pull_request:
+    branches: [ main, develop ]
+    paths: [ 'frontend/**', 'package.json' ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+        
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm ci
+        
+    - name: Run tests
+      run: |
+        cd frontend
+        npm test -- --watchAll=false
+        
+    - name: Build application
+      run: |
+        cd frontend
+        npm run build
+        
+    - name: Generate types (optional)
+      run: |
+        cd frontend
+        npm run generate-types || echo "Backend not available, skipping type generation"
+      continue-on-error: true

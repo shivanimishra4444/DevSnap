@@ -31,7 +31,7 @@ jobs:
     - name: Run tests
       run: |
         cd frontend
-        npm test -- --watchAll=false
+        npm test -- --run
         
     - name: Build application
       run: |

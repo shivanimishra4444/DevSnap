@@ -1,38 +1,18 @@
-# DevSnap Project - Minimal .gitignore
+# DevSnap Project - Root .gitignore
+# =================================
 
-# ===== PYTHON BACKEND =====
-# Virtual environments
-backend/venv/
-.venv/
+# Project documentation (if needed)
 PROJECT_SETUP_GUIDE.md
 DATABASE_CONCEPTS_GUIDE.md
 DATABASE_SCHEMA.sql
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-
-# Environment variables (contains secrets)
-backend/env.local
-.env
-.env.local
-# Note: env.example is tracked (template for others)
-
-# Logs
-*.log
-backend/server.log
-
-# ===== FRONTEND =====
-# Node modules (if added later)
-frontend/node_modules/
-
-# ===== IDE =====
+# IDE
 .vscode/
 .idea/
 
-# ===== OS =====
+# OS
 .DS_Store
 Thumbs.db
+
+# Virtual environments (root level)
+.venv/

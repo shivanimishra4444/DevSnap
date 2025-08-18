@@ -1,3 +1,6 @@
+# DevSnap Frontend - React/Vite
+# =============================
+
 # Dependencies
 node_modules/
 package-lock.json
@@ -6,21 +9,27 @@ package-lock.json
 dist/
 build/
 
-# Next.js
-.next/
-out/
+# Project documentation (if needed)
+PROJECT_SETUP_GUIDE.md
 
 # Environment variables
 .env
 .env.local
+.env.development.local
+.env.production.local
 
 # TypeScript
 *.tsbuildinfo
 
-# OS
-.DS_Store
-
 # Logs
 *.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
 
 

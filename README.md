@@ -251,13 +251,5 @@ Enable debug mode in `env.local`:
 DEBUG=True
 ```
 
-## 📞 Support
-
-For issues and questions:
-1. Check the troubleshooting section
-2. Review API documentation at `/docs`
-3. Check server logs for error messages
-
----
 
 **Happy coding! 🚀**

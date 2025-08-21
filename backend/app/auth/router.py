@@ -24,7 +24,7 @@ load_dotenv("env.local")
 GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
 GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
 GITHUB_CALLBACK_URL = os.getenv("GITHUB_CALLBACK_URL")
-FRONTEND_URL = "http://localhost:3000"  # Frontend URL for redirect
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 

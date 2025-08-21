@@ -40,9 +40,17 @@ app = FastAPI(
 )
 
 # Add CORS middleware (allows frontend to communicate with backend)
+import os
+from dotenv import load_dotenv
+
+load_dotenv("env.local")
+
+# Get frontend URL from environment variable
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Your Next.js frontend
+    allow_origins=[FRONTEND_URL],  # Your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

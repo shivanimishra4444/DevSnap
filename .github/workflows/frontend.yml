@@ -69,8 +69,6 @@ jobs:
         context: ./frontend
         push: true
         tags: devsnapregistry.azurecr.io/devsnap-frontend:${{ github.sha }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
 
     - name: Deploy Frontend to Azure Container Apps
       uses: azure/container-apps-deploy-action@v1

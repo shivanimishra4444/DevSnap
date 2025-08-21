@@ -1,5 +1,5 @@
 """
-DevSnap FastAPI Backend 
+DevSnap FastAPI Backend - Updated via CI/CD
 """
 
 from fastapi import FastAPI
@@ -40,9 +40,17 @@ app = FastAPI(
 )
 
 # Add CORS middleware (allows frontend to communicate with backend)
+import os
+from dotenv import load_dotenv
+
+load_dotenv("env.local")
+
+# Get frontend URL from environment variable
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Your Next.js frontend
+    allow_origins=[FRONTEND_URL],  # Your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -62,9 +70,10 @@ async def root():
     Root endpoint - Welcome message
     """
     return {
-        "message": "Welcome to DevSnap API! 🚀",
+        "message": "Welcome to DevSnap API! 🚀 (Deployed via CI/CD)",
         "status": "running",
-        "next_step": "Database connection"
+        "next_step": "Database connection",
+        "deployment": "automated"
     }
 
 # Health check endpoint

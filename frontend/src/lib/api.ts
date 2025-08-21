@@ -2,8 +2,13 @@ import { Blog, Project, ProjectCreate, UserUpdate, AIResponse, BioGenerationRequ
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 // Create axios instance
+const apiUrl = import.meta.env.VITE_API_URL;
+if (!apiUrl) {
+  throw new Error('VITE_API_URL environment variable is required');
+}
+
 const api: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:8000/api' : '/api'),
+  baseURL: apiUrl + '/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -39,7 +44,7 @@ api.interceptors.response.use(
   }
 );
 
-// Basic API endpoints
+// Authentication API endpoints
 export const authAPI = {
   // Get current user profile
   getCurrentUser: () => api.get('/auth/me'),
@@ -48,45 +53,58 @@ export const authAPI = {
   logout: () => api.post('/auth/logout'),
 };
 
+// Projects API endpoints
 export const projectAPI = {
   // Get projects
   getProjects: () => api.get('/projects/'),
   
-  // Create project
+  // Create project (collection endpoint - uses trailing slash)
   createProject: (project: ProjectCreate) => api.post('/projects/', project),
   
   // Get project by ID
-  getProject: (projectId: string) => api.get(`/projects/${projectId}/`),
+  getProject: (projectId: string) => api.get(`/projects/${projectId}`),
   
   // Update project
-  updateProject: (projectId: string, updateData: Partial<Project>) => api.put(`/projects/${projectId}/`, updateData),
+  updateProject: (projectId: string, updateData: Partial<Project>) => api.put(`/projects/${projectId}`, updateData),
   
   // Delete project
-  deleteProject: (projectId: string) => api.delete(`/projects/${projectId}/`),
+  deleteProject: (projectId: string) => api.delete(`/projects/${projectId}`),
 };
+
+// Blogs API endpoints
 export const blogAPI = {
-      // Get blogs
-  getBlogs: () => api.get('/blogs/'),
   // Get blogs
-  getBlog: (blogId: string) => api.get(`/blogs/${blogId}/`),
+  getBlogs: () => api.get('/blogs/'),
+  
+  // Get blog by ID
+  getBlog: (blogId: string) => api.get(`/blogs/${blogId}`),
+
+  // Create blog
+  createBlog: (blog: Blog) => api.post('/blogs/', blog),
+
+  // Update blog
+  updateBlog: (blogId: string, updateData: Partial<Blog>) => api.put(`/blogs/${blogId}`, updateData),
 
   // Delete blog
   deleteBlog: (blogId: string) => api.delete(`/blogs/${blogId}`),
-
-  // Update blog
-  updateBlog: (blogId: string, updateData: Partial<Blog>) => api.put(`/blogs/${blogId}/`, updateData),
-    // Create blog
-  createBlog: (blog: Blog) => api.post('/blogs/', blog),
 };
 
+// Users API endpoints
 export const userAPI = {
-  // Update user profile
-  updateUser: (userId: string, updateData: UserUpdate) => api.put(`/users/${userId}/`, updateData),
+  // Get users
+  getUsers: () => api.get('/users/'),
   
   // Get user by ID
-  getUser: (userId: string) => api.get(`/users/${userId}/`),
+  getUser: (userId: string) => api.get(`/users/${userId}`),
+  
+  // Update user
+  updateUser: (userId: string, updateData: UserUpdate) => api.put(`/users/${userId}`, updateData),
+  
+  // Delete user
+  deleteUser: (userId: string) => api.delete(`/users/${userId}`),
 };
 
+// AI API endpoints
 export const aiAPI = {
   // Generate bio using AI
   generateBio: (request: BioGenerationRequest) => api.post<AIResponse>('/ai/generate-bio', request),

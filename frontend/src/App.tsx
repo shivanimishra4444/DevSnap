@@ -11,6 +11,7 @@ import ProfileScreen from './components/dashboard/Profile/ProfileScreen';
 const App = () => {
   return (
     <ErrorBoundary>
+      {/* DevSnap - Deployed via CI/CD */}
       <AuthProvider>
         <Routes>
           <Route path="/auth/callback" element={<AuthCallback />} />

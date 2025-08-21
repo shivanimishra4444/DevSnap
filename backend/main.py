@@ -1,5 +1,5 @@
 """
-DevSnap FastAPI Backend 
+DevSnap FastAPI Backend - Updated via CI/CD
 """
 
 from fastapi import FastAPI
@@ -70,9 +70,10 @@ async def root():
     Root endpoint - Welcome message
     """
     return {
-        "message": "Welcome to DevSnap API! 🚀",
+        "message": "Welcome to DevSnap API! 🚀 (Deployed via CI/CD)",
         "status": "running",
-        "next_step": "Database connection"
+        "next_step": "Database connection",
+        "deployment": "automated"
     }
 
 # Health check endpoint

@@ -1,8 +1,12 @@
 # DevSnap Project Setup Guide
 
 ## 🚀 Overview
-
 DevSnap is a fullstack web application that allows developers to create, customize, and host their personal portfolio websites, enhanced with AI-generated content and modern dev tooling.
+Below is demo. Click play
+
+https://github.com/user-attachments/assets/16c4531b-b1b1-410b-8405-28dbd8801a7e
+
+
 
 ## 🏗️ Architecture
 
@@ -244,12 +248,7 @@ Once the server is running, visit:
 3. **Database Connection Issues:** Verify DATABASE_URL format and PostgreSQL is running
 4. **CORS Errors:** Update CORS settings in main.py
 
-### Debug Mode
 
-Enable debug mode in `env.local`:
-```env
-DEBUG=True
-```
 
 
 **Happy coding! 🚀**
